@@ -10,8 +10,7 @@ class ZmeykaEnv(gym.Env):
 
     def __init__(self, **kwargs):
         self.controller_params = kwargs
-        self.viewer = None
-        self.action_space = Discrete(4)
+        self.action_space = Discrete(3)
 
     def step(self, action):
         self.last_obs, rewards, done, info = self.controller.step(action)
@@ -19,8 +18,8 @@ class ZmeykaEnv(gym.Env):
 
     def reset(self):
         self.controller = Controller(self.controller_params)
-        self.last_obs = self.controller.grid.grid
-        return self.last_obs
+        self.last_obs = self.controller.grid.pixels
+        return self.last_obs 
 
     def render(self, mode='human', close=False):
         if self.viewer is None:
